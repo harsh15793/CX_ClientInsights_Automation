@@ -8,11 +8,13 @@ from datetime import datetime
 #url = input('>')
 
 #url = 'https://www.trustpilot.com/review/nestle.de'
-url = 'https://www.trustpilot.com/review/www.danskebank.dk'
+#url = 'https://www.trustpilot.com/review/www.danskebank.dk'
+#url = 'https://www.trustpilot.com/review/www.att.com'
+#url = 'https://www.trustpilot.com/review/dior-us.com'
+url = 'https://www.trustpilot.com/review/uspoloassn.com'
 workbook =''
 page_count = 1
 row_id = 0
-
 
 def create_file(url):
     html_text = requests.get(url).text
