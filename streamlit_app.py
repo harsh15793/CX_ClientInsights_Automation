@@ -6,16 +6,14 @@ from wordcloud import WordCloud, STOPWORDS
 import plotly.graph_objects as go
 from streamlit_option_menu import option_menu
 
-keywords = ['service','payment','customer','experience','support']
+keywords = ['service','payment','customer experience','support']
 
-
-st.set_page_config(page_title = 'Customer Experience',layout = 'wide')
+st.set_page_config(page_title = 'Customer Experience', layout='wide')
 st.title("Customer Sentiment Analyzer")
 selected_company = st.selectbox("Select the Company:",options = ['U.S. Polo Assn','Danske Bank'])
 selected_keyword = st.selectbox("Select the Keyword:",options = keywords)
 st.markdown("---")
-st.write(f"{selected_company} Sentiments")
-st.markdown("---")
+st.header(f"{selected_company} Sentiments for '{selected_keyword}'")
 
 df =''
 
@@ -57,8 +55,8 @@ average_nue = value_nue/count
 fig1 = go.Figure(go.Indicator(
     mode = "gauge+number",
     value = average_neg,
-    #domain = {'x': [0, 1], 'y': [0, 1]},
-    title = {'text': f"Negative Sentiment for {selected_keyword}"},
+    domain = {'x': [0, 1], 'y': [0, 1]},
+    title = {'text': f"Negative Sentiment"},
     gauge = {'axis': {'range': [0, 1]},'bar': {'color': "black"},
              'steps' : [
                  {'range': [0, 0.4], 'color': "yellow"},
@@ -68,16 +66,19 @@ fig1 = go.Figure(go.Indicator(
 fig2 = go.Figure(go.Indicator(
     mode = "gauge+number",
     value = average_pos,
-    #domain = {'x': [0, 0], 'y': [0, 0]},
-    title = {'text': f"Positive Sentiment for {selected_keyword}"},
+    domain = {'x': [0, 1], 'y': [0, 1]},
+    title = {'text': f"Positive Sentiment"},
     gauge = {'axis': {'range': [0, 1]},'bar': {'color': "black"},
              'steps' : [
                  {'range': [0, 0.4], 'color': "yellow"},
                  {'range': [0.4, 0.7], 'color': "lightgreen"},
                  {'range': [0.7, 1], 'color': "darkgreen"}]}))
 
-st.plotly_chart(fig1, use_container_width=False)
-st.plotly_chart(fig2, use_container_width=False)
+left,right = st.columns(2)
+with left:
+    st.plotly_chart(fig1)
+with right:
+    st.plotly_chart(fig2)
 
 
 #stopwords = STOPWORDS
