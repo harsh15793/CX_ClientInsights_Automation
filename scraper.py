@@ -8,10 +8,10 @@ from datetime import datetime
 #url = input('>')
 
 #url = 'https://www.trustpilot.com/review/nestle.de'
-#url = 'https://www.trustpilot.com/review/www.danskebank.dk'
+url = 'https://www.trustpilot.com/review/www.danskebank.dk'
 #url = 'https://www.trustpilot.com/review/www.att.com'
 #url = 'https://www.trustpilot.com/review/dior-us.com'
-url = 'https://www.trustpilot.com/review/uspoloassn.com'
+#url = 'https://www.trustpilot.com/review/uspoloassn.com'
 workbook =''
 page_count = 1
 row_id = 0
@@ -49,6 +49,7 @@ def find_reviews(soup):
         item['Id'] = row_id
         item['Company Name'] = company_name
         item['Reviewer Name'] = review.find('span', class_ = 'typography_heading-xxs__QKBS8 typography_appearance-default__AAY17').text
+        item['Reviewer Location'] = review.find('div', class_ = 'typography_body-m__xgxZ_ typography_appearance-subtle__8_H2l styles_detailsIcon__Fo_ua').span.text
         item['Stars Given'] = int(review.find('div', class_ ='star-rating_starRating__4rrcf star-rating_medium__iN6Ty').img['alt'].split()[1])
         item['Review Heading'] = review.find('h2', class_ = 'typography_heading-s__f7029 typography_appearance-default__AAY17').text
         try:
